@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
-
 version = "1.0"
 group = "com.appyvet"
-
 android {
 
     compileSdkVersion 21
@@ -21,17 +19,17 @@ android {
             res.srcDirs = ['res']
         }
     }
+    dexOptions {
+        incremental true
+    }
 }
-
 repositories {
     mavenCentral()
 }
-
 //signing {
 //    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
 //    sign configurations.archives
 //}
-
 task publishLocal(type: Upload) {
     configuration = configurations.archives
     repositories.mavenDeployer {
@@ -46,4 +44,7 @@ task publishLocal(type: Upload) {
     task generateJavadocs(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
     }
+}
+
+dependencies {
 }
